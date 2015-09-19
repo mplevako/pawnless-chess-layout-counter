@@ -25,7 +25,7 @@ trait DiagonalRider extends Piece {
 trait KnightedPiece extends Piece {
   override def controls(anotherCell: Cell): Boolean = {
     val leapVector = (abs(anotherCell._1 - cell._1), abs(anotherCell._2 - cell._2))
-    (leapVector._1 == 1 && leapVector._2 == 2) || (leapVector._1 == 2 && leapVector._2 == 1)
+    leapVector == (1,2) || leapVector == (2,1)
   }
 }
 
