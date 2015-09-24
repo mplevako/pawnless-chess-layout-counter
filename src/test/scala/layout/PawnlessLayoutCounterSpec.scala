@@ -1,7 +1,7 @@
 package layout
 
 import org.scalatest.{Matchers, WordSpec}
-import pieces.{King, Knight, Queen, Rook}
+import pieces._
 
 class PawnlessLayoutCounterSpec extends WordSpec with Matchers with LayoutCounter {
 
@@ -10,6 +10,24 @@ class PawnlessLayoutCounterSpec extends WordSpec with Matchers with LayoutCounte
 
     "the board dimensions are NxM and there are no pieces" should {
       "be 0" in { countLayouts(8, 8)(Seq.empty) shouldBe 0 }
+    }
+
+    "the board dimensions are 1x1 and there is more than one piece" should {
+      "be 0" in {
+        countLayouts(1, 1)(Seq(Bishop,King)) shouldBe 0
+        countLayouts(1, 1)(Seq(King,Knight)) shouldBe 0
+        countLayouts(1, 1)(Seq(Queen,Rook))  shouldBe 0
+      }
+    }
+
+    "the board dimensions are 100x100 and there is only one piece" should {
+      "be 10000" in {
+        countLayouts(100, 100)(Seq(Bishop)) shouldBe 10000
+        countLayouts(100, 100)(Seq(King))   shouldBe 10000
+        countLayouts(100, 100)(Seq(Knight)) shouldBe 10000
+        countLayouts(100, 100)(Seq(Queen))  shouldBe 10000
+        countLayouts(100, 100)(Seq(Rook))   shouldBe 10000
+      }
     }
 
     "the board dimensions are 3x3 and there are 2 kings and 1 rook" should {
@@ -21,11 +39,14 @@ class PawnlessLayoutCounterSpec extends WordSpec with Matchers with LayoutCounte
     }
 
     "the board dimensions are QxQ and there are Q queens" should {
-      "be 2 when Q is 4"    in { countLayouts(4, 4)(Seq.fill(4)(Queen))    shouldBe 2 }
-      "be 10 when Q is 5"   in { countLayouts(5, 5)(Seq.fill(5)(Queen))    shouldBe 10 }
-      "be 4 when Q is 6"    in { countLayouts(6, 6)(Seq.fill(6)(Queen))    shouldBe 4 }
-      "be 92 when Q is 8"   in { countLayouts(8, 8)(Seq.fill(8)(Queen))    shouldBe 92 }
-      "be 724 when Q is 10" in { countLayouts(10, 10)(Seq.fill(10)(Queen)) shouldBe 724 }
+      "be 1 when Q is 1"  in { countLayouts(1, 1)(Seq.fill(1)(Queen)) shouldBe 1 }
+      "be 0 when Q is 2"  in { countLayouts(2, 2)(Seq.fill(2)(Queen)) shouldBe 0 }
+      "be 0 when Q is 3"  in { countLayouts(3, 3)(Seq.fill(3)(Queen)) shouldBe 0 }
+      "be 2 when Q is 4"  in { countLayouts(4, 4)(Seq.fill(4)(Queen)) shouldBe 2 }
+      "be 10 when Q is 5" in { countLayouts(5, 5)(Seq.fill(5)(Queen)) shouldBe 10 }
+      "be 4 when Q is 6"  in { countLayouts(6, 6)(Seq.fill(6)(Queen)) shouldBe 4 }
+      "be 40 when Q is 7" in { countLayouts(7, 7)(Seq.fill(7)(Queen)) shouldBe 40 }
+      "be 92 when Q is 8" in { countLayouts(8, 8)(Seq.fill(8)(Queen)) shouldBe 92 }
     }
 
     "the board dimensions are RxR and there are R rooks" must {
