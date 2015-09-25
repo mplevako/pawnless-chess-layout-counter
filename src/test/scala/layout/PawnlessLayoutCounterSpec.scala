@@ -39,14 +39,15 @@ class PawnlessLayoutCounterSpec extends WordSpec with Matchers with LayoutCounte
     }
 
     "the board dimensions are QxQ and there are Q queens" should {
-      "be 1 when Q is 1"  in { countLayouts(1, 1)(Seq.fill(1)(Queen)) shouldBe 1 }
-      "be 0 when Q is 2"  in { countLayouts(2, 2)(Seq.fill(2)(Queen)) shouldBe 0 }
-      "be 0 when Q is 3"  in { countLayouts(3, 3)(Seq.fill(3)(Queen)) shouldBe 0 }
-      "be 2 when Q is 4"  in { countLayouts(4, 4)(Seq.fill(4)(Queen)) shouldBe 2 }
-      "be 10 when Q is 5" in { countLayouts(5, 5)(Seq.fill(5)(Queen)) shouldBe 10 }
-      "be 4 when Q is 6"  in { countLayouts(6, 6)(Seq.fill(6)(Queen)) shouldBe 4 }
-      "be 40 when Q is 7" in { countLayouts(7, 7)(Seq.fill(7)(Queen)) shouldBe 40 }
-      "be 92 when Q is 8" in { countLayouts(8, 8)(Seq.fill(8)(Queen)) shouldBe 92 }
+      "be 1 when Q is 1"     in { countLayouts(1, 1)(Seq.fill(1)(Queen)) shouldBe 1 }
+      "be 0 when Q is 2"     in { countLayouts(2, 2)(Seq.fill(2)(Queen)) shouldBe 0 }
+      "be 0 when Q is 3"     in { countLayouts(3, 3)(Seq.fill(3)(Queen)) shouldBe 0 }
+      "be 2 when Q is 4"     in { countLayouts(4, 4)(Seq.fill(4)(Queen)) shouldBe 2 }
+      "be 10 when Q is 5"    in { countLayouts(5, 5)(Seq.fill(5)(Queen)) shouldBe 10 }
+      "be 4 when Q is 6"     in { countLayouts(6, 6)(Seq.fill(6)(Queen)) shouldBe 4 }
+      "be 40 when Q is 7"    in { countLayouts(7, 7)(Seq.fill(7)(Queen)) shouldBe 40 }
+      "be 92 when Q is 8"    in { countLayouts(8, 8)(Seq.fill(8)(Queen)) shouldBe 92 }
+      "be 724 for 10 queens" in { countLayouts(10, 10)(Seq.fill(10)(Queen)) shouldBe 724 }
     }
 
     "the board dimensions are RxR and there are R rooks" must {
