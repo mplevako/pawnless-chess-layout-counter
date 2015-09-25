@@ -26,9 +26,13 @@ trait LayoutCounter {
    * @return             the number of all distinct layouts of the set of pieces on the board where none of the pieces is
    *                     in a position to take any of the others
    */
-  def countLayouts(boardRows: Int, boardColumns: Int)(pieceStock: PieceStock): Long = {
+  def countLayouts(boardRows: Int, boardColumns: Int)(pieceStock: PieceStock): Int = {
+    require(boardRows >= 0)
+    require(boardColumns >= 0)
+
     val board = for{r <- 0 until boardRows
                     c <- 0 until boardColumns} yield (r,c)
+
     @tailrec
     def enumerateLayouts(partialCandidates: Set[Layout], pieceStock: PieceStock): Set[Layout] = pieceStock match {
       case Nil => partialCandidates
@@ -41,6 +45,6 @@ trait LayoutCounter {
         enumerateLayouts(extendedCandidates, stock)
     }
 
-    if(pieceStock.isEmpty) 0L else enumerateLayouts(Set(Set.empty[Piece]), pieceStock).size
+    if(pieceStock.isEmpty) 0 else enumerateLayouts(Set(Set.empty[Piece]), pieceStock).size
   }
 }
